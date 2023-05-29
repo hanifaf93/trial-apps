@@ -19,8 +19,12 @@ WORKDIR /var/www/html
 # Copy file proyek Laravel ke working directory di container
 COPY . /var/www/html
 
+RUN chown -R www-data:www-data /var/www/html
+
+RUN chmod -R 777 /var/www/html/storage
+
 # Set permission untuk folder storage dan bootstrap/cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
