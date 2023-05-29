@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  trialapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/var/www/html
+    networks:
+      - trialapps-network
+
+  trialnginx:
+    image: nginx
+    ports:
+      - 8089:80
+    volumes:
+      - ./nginx-conf/nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - trialapps-network
+
+networks:
+  trialapps-network:
+    driver: bridge
+
+volumes:
+  dbdata:
