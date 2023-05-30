@@ -14,10 +14,10 @@ RUN apt-get update && apt-get install -y \
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 # Set working directory ke direktori proyek Laravel
-WORKDIR /var/www/html
+# WORKDIR /var/www/html
 
 # Copy file proyek Laravel ke working directory di container
-COPY ./ /var/www/html
+COPY . /var/www/html
 
 RUN chown -R www-data:www-data /var/www/html
 
@@ -30,15 +30,13 @@ RUN chmod -R 777 /var/www/html/storage
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install dependensi PHP melalui Composer
-# RUN composer install --optimize-autoloader --no-dev
+RUN composer install --optimize-autoloader --no-dev
 
 # Set permission untuk folder vendor
-# RUN chown -R www-data:www-data /var/www/html/vendor
+RUN chown -R www-data:www-data /var/www/html/vendor
 
 # Expose port 9000 untuk koneksi ke server PHP-FPM
 EXPOSE 9000
 
 # Command yang dijalankan ketika container dijalankan
-CMD bash -c ["composer install","php-fpm"]
-
-# CMD bash -c "composer install && php artisan serve --host 0.0.0.0 --port 5001"
+CMD ["php-fpm"]
