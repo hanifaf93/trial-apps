@@ -33,7 +33,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # RUN composer install --optimize-autoloader --no-dev
 
 # Set permission untuk folder vendor
-RUN chown -R www-data:www-data /var/www/html/vendor
+# RUN chown -R www-data:www-data /var/www/html/vendor
 
 # Expose port 9000 untuk koneksi ke server PHP-FPM
 EXPOSE 9000
