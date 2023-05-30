@@ -39,6 +39,6 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 EXPOSE 9000
 
 # Command yang dijalankan ketika container dijalankan
-CMD ["php-fpm && composer install"]
+CMD bash -c ["composer install","php-fpm"]
 
 # CMD bash -c "composer install && php artisan serve --host 0.0.0.0 --port 5001"
