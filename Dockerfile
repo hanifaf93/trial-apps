@@ -30,7 +30,7 @@ RUN chmod -R 777 /var/www/html/storage
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install dependensi PHP melalui Composer
-RUN composer install --optimize-autoloader --no-dev
+# RUN composer install --optimize-autoloader --no-dev
 
 # Set permission untuk folder vendor
 RUN chown -R www-data:www-data /var/www/html/vendor
@@ -39,4 +39,6 @@ RUN chown -R www-data:www-data /var/www/html/vendor
 EXPOSE 9000
 
 # Command yang dijalankan ketika container dijalankan
-CMD ["php-fpm"]
+CMD ["php-fpm && composer install"]
+
+# CMD bash -c "composer install && php artisan serve --host 0.0.0.0 --port 5001"
